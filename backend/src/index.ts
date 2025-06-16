@@ -19,7 +19,7 @@ const io = new Server(httpServer, {
   cors: {
     origin: process.env.NODE_ENV === 'production' 
       ? ["https://job-platform-rho.vercel.app/"] 
-      : ["http://localhost:3000"],
+      : ["https://job-platform-rho.vercel.app"],
     methods: ["GET", "POST", "PUT"],
     credentials: true
   }
@@ -43,7 +43,7 @@ app.use(limiter);
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
     ? ["https://job-platform-rho.vercel.app/"] 
-    : ["http://localhost:3000"],
+    : ["https://job-platform-rho.vercel.app"],
   credentials: true
 }));
 
