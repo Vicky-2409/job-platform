@@ -18,6 +18,7 @@ const httpServer = createServer(app);
 const allowedOrigins = [
   "https://job-platform-rho.vercel.app",
   "https://job-platform-1zv8jy7e0-vicky-2409s-projects.vercel.app",
+  "https://job-platform-git-main-vicky-2409s-projects.vercel.app",
   "https://job-platform-vicky-2409s-projects.vercel.app" // Optional: catch any future Vercel URL
 ];
 
