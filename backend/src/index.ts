@@ -15,11 +15,28 @@ const app = express();
 const httpServer = createServer(app);
 
 // Socket.io setup with CORS
+const allowedOrigins = [
+  "https://job-platform-rho.vercel.app",
+  "https://job-platform-1zv8jy7e0-vicky-2409s-projects.vercel.app",
+  "https://job-platform-vicky-2409s-projects.vercel.app" // Optional: catch any future Vercel URL
+];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like curl/postman) or whitelisted domains
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true
+}));
+
+// Same for socket.io
 const io = new Server(httpServer, {
   cors: {
-    origin: process.env.NODE_ENV === 'production' 
-      ? ["https://job-platform-rho.vercel.app"] 
-      : ["https://job-platform-rho.vercel.app"],
+    origin: allowedOrigins,
     methods: ["GET", "POST", "PUT"],
     credentials: true
   }
@@ -41,12 +58,7 @@ const limiter = rateLimit({
 app.use(limiter);
 
 // CORS configuration
-app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? ["https://job-platform-rho.vercel.app"] 
-    : ["https://job-platform-rho.vercel.app"],
-  credentials: true
-}));
+
 
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
