@@ -18,12 +18,13 @@ const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
     origin: process.env.NODE_ENV === 'production' 
-      ? ["https://job-platform-rho.vercel.app/"] 
+      ? ["https://job-platform-rho.vercel.app"] 
       : ["https://job-platform-rho.vercel.app"],
     methods: ["GET", "POST", "PUT"],
     credentials: true
   }
 });
+
 
 const PORT = process.env.PORT || 5000;
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://svignesh2409:GOgxz3UEBjCrSNtl@cluster0.hchjyx3.mongodb.net/job-platform';
@@ -42,7 +43,7 @@ app.use(limiter);
 // CORS configuration
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
-    ? ["https://job-platform-rho.vercel.app/"] 
+    ? ["https://job-platform-rho.vercel.app"] 
     : ["https://job-platform-rho.vercel.app"],
   credentials: true
 }));
